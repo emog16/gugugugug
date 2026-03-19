@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Moderna</title>
+    <style>
+        /* CSS: El diseño de la calculadora */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f9;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+        }
+
+        .calculadora {
+            background-color: #333;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 10px 20px rgba(0,0,0,0.3);
+            width: 320px;
+        }
+
+        #pantalla {
+            width: 100%;
+            height: 50px;
+            background-color: #222;
+            color: #fff;
+            text-align: right;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            padding: 10px;
+            font-size: 1.5rem;
+            box-sizing: border-box;
+        }
+
+        .botones {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        button {
+            padding: 20px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+
+        .operador {
+            background-color: #ff9500;
+            color: white;
+        }
+
+        .especial {
+            background-color: #a5a5a5;
+            color: black;
+        }
+
+        .numero {
+            background-color: #505050;
+            color: white;
+        }
+
+        .igual {
+            grid-column: span 2;
+            background-color: #2ecc71;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="calculadora">
+        <input type="text" id="pantalla" readonly>
+        
+        <div class="botones">
+            <button class="especial" onclick="limpiar()">C</button>
+            <button class="especial" onclick="borrarUno()">←</button>
+            <button class="operador" onclick="agregar('/')">/</button>
+            <button class="operador" onclick="agregar('*')">×</button>
+
+            <button class="numero" onclick="agregar('7')">7</button>
+            <button class="numero" onclick="agregar('8')">8</button>
+            <button class="numero" onclick="agregar('9')">9</button>
+            <button class="operador" onclick="agregar('-')">-</button>
+
+            <button class="numero" onclick="agregar('4')">4</button>
+            <button class="numero" onclick="agregar('5')">5</button>
+            <button class="numero" onclick="agregar('6')">6</button>
+            <button class="operador" onclick="agregar('+')">+</button>
+
+            <button class="numero" onclick="agregar('1')">1</button>
+            <button class="numero" onclick="agregar('2')">2</button>
+            <button class="numero" onclick="agregar('3')">3</button>
+            <button class="numero" onclick="agregar('.')">.</button>
+
+            <button class="numero" onclick="agregar('0')">0</button>
+            <button class="igual" onclick="calcular()">=</button>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript: La lógica que hace que funcione
+        const pantalla = document.getElementById('pantalla');
+
+        function agregar(valor) {
+            pantalla.value += valor;
+        }
+
+        function limpiar() {
+            pantalla.value = '';
+        }
+
+        function borrarUno() {
+            pantalla.value = pantalla.value.slice(0, -1);
+        }
+
+        function calcular() {
+            try {
+                // eval() procesa el string como una operación matemática
+                pantalla.value = eval(pantalla.value);
+            } catch (error) {
+                pantalla.value = 'Error';
+                setTimeout(limpiar, 1500);
+            }
+        }
+    </script>
+</body>
+</html>
